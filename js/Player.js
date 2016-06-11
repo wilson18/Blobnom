@@ -5,6 +5,7 @@ var openTick=0;
 var openTickMax=15;
 var sizeX = 32;
 var sizeY = 32;
+var dead=false;
 
 function drawCharacter(){
 	var char = new Image();
@@ -15,6 +16,7 @@ function drawCharacter(){
     	openTick++;
     }
     isDead();
+    doMovement()
     char.src = "images/p_"+facing+"_"+(open?"open":"closed")+".png";
     ctx.drawImage(char, posX, posY,sizeX,sizeY);   
     
@@ -41,23 +43,43 @@ function doMovementMath(elapsed){
 	return 100*elapsed;
 }
 function isDead(){
-	
 	switch(facing) {
     case "left":
     	if(posX <0){
-    		facing="right";
+    		dead=true;
     	}
         break;
     case "right":
     	if(posX>canvas.width-sizeX){
-    		facing="left";
+    		dead=true;
     	}
         break;
     case "up":
+    	if(posY<0){
+    		dead=true;
+    	}
         break;
     case "down":
+    	if(posY>canvas.width-sizeY){
+    		dead=true;
+    	}
         break;
     default:
         break;
-} 
+	}
+	if(dead && running){
+		alert("You are dead!");
+		running=false;
+	}
+}
+function doMovement(){
+	if (InputManager.padPressed & InputManager.PAD.UP){
+        facing="up";
+	}else if (InputManager.padPressed & InputManager.PAD.DOWN){
+        facing="down";
+	}else if (InputManager.padPressed & InputManager.PAD.LEFT){
+        facing="left";
+	}else if (InputManager.padPressed & InputManager.PAD.RIGHT){
+        facing="right";
+	}
 }

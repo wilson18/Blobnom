@@ -6,6 +6,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href='css/main.css' rel='stylesheet' type='text/css'>
         <title>Blobnom </title>
+          <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'></script>
+          <script src="js/InputManager.js"></script>
           <script src='js/RunMe.js'></script>
           <script src='js/GameLoopManager.js'></script>
           <script src='js/Player.js'></script>
