@@ -1,12 +1,3 @@
-
-var facing='right';
-var open=true;
-var openTick=0;
-var openTickMax=15;
-var sizeX = 32;
-var sizeY = 32;
-var dead=false;
-
 function drawCharacter(){
 	var char = new Image();
     if(openTick>openTickMax){
