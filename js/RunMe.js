@@ -7,7 +7,7 @@ ctx = null;
 var posX = 20;
 var posY = 20;
 var running=true;
-var paused=true;
+var paused=false;
 var facing='right';
 var open=true;
 var openTick=0;
@@ -15,24 +15,22 @@ var openTickMax=15;
 var sizeX = 32;
 var sizeY = 32;
 var dead=false;
-var mode='easy'; //hard or challenge 
+var mode='Easy'; //hard or challenge 
 var keysPressed=0;
-var time=0; 
+var time=null; 
 var points=0;
+var speed=150;
+var startTime;
+var finishTime; 
+var offsetTime=0;
+var curTime=0;
 
 function GameTick(elapsed){
 	
-	InputManager.padUpdate();
-	if (InputManager.padPressed & InputManager.PAD.CANCEL){
-        paused = !paused;
-	}
-	if(InputManager.currentlyPressedKeys[InputManager.KEY.R]){
-		reset();
-	}
+	runKeyBoardCommands();
 	// --- Logic
 	if(running & !paused){
 		moveCharacter(elapsed);
-	    
 	    // --- Rendering
 	
 	    // Clear the screen
@@ -41,26 +39,26 @@ function GameTick(elapsed){
 	   
 	    // Render objects
 	    drawCharacter();
+	    addScreenText();
 	}
-    
-    
-
-
 }
-function reset(){
-	dead=false;
-	posX=20;
-	posY=20;
-	running=true;
-	paused=false;
-	facing='right';
-	sizeX = 32;
-	sizeY = 32;
-	dead=false;
-	mode='easy'; //hard or challenge 
-	keysPressed=0;
-	time=0; 
-	points=0;
+function addScreenText(){
+	//Bottom ScoreBoard
+	if(time==null){
+		var now =new Date();
+		curTime= Math.round((((now- startTime) / 1000)+offsetTime)*100)/100;
+	}
+	ctx.textAlign = "left";
+	ctx.fillStyle = "white";
+	ctx.font = "20px sans-serif";
+	ctx.fillText("Points: "+points+"  Keys: " +keysPressed+ "   Time: " + (time==null?curTime:time) , 3, canvas.height-10);
+	ctx.textAlign = "right";
+	//Draw GameMode
+	ctx.textAlign = "right";
+	ctx.fillStyle = "white";
+	ctx.font = "20px sans-serif";
+	ctx.fillText("Mode: "+mode, canvas.width-10, 20);
+	ctx.textAlign = "right";
 }
 
 	$(document).ready(function () {
@@ -70,5 +68,6 @@ function reset(){
 	    InputManager.connect(document, canvas);
 	    GameLoopManager.run(GameTick);
 		InputManager.reset();
+		startTime = new Date();
     
 	});

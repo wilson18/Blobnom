@@ -11,6 +11,8 @@
           <script src='js/RunMe.js'></script>
           <script src='js/GameLoopManager.js'></script>
           <script src='js/Player.js'></script>
+          <script src="js/KeyBoardCommands.js"></script>
+          <script src="js/GameModeHandler.js"></script>
 
     
     </head>

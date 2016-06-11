@@ -31,7 +31,7 @@ function moveCharacter(elapsed){
 	} 
 }
 function doMovementMath(elapsed){
-	return 100*elapsed;
+	return speed*elapsed;
 }
 function isDead(){
 	switch(facing) {
@@ -59,18 +59,8 @@ function isDead(){
         break;
 	}
 	if(dead && running){
-		alert("You are dead!");
+		time=curTime;
 		running=false;
-	}
-}
-function doMovement(){
-	if (InputManager.padPressed & InputManager.PAD.UP){
-        facing="up";
-	}else if (InputManager.padPressed & InputManager.PAD.DOWN){
-        facing="down";
-	}else if (InputManager.padPressed & InputManager.PAD.LEFT){
-        facing="left";
-	}else if (InputManager.padPressed & InputManager.PAD.RIGHT){
-        facing="right";
+		alert("You are dead!");
 	}
 }

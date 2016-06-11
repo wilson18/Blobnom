@@ -1,9 +1,7 @@
 // ------------------------------------------------
 
-InputManager = new function()
-{
-	this.reset = function()
-	{
+InputManager = new function(){
+	this.reset = function(){
 		this.currentlyPressedKeys = {};
 		this.lastKeyPressed = null;
 		this.mouseDown = false;
@@ -20,8 +18,7 @@ InputManager = new function()
 	this.lastMouseX = 0;
 	this.lastMouseY = 0;
 	
-	this.handleKeyDown = function (event)
-	{
+	this.handleKeyDown = function (event){
 		this.currentlyPressedKeys[event.keyCode] = true;
 		this.lastKeyPressed = event.keyCode;
 		if (event.keyCode != 116 && event.keyCode != 122) // F5 and F11
@@ -31,8 +28,7 @@ InputManager = new function()
 		}
 	}
 
-	this.handleKeyUp = function (event)
-	{
+	this.handleKeyUp = function (event){
 		this.currentlyPressedKeys[event.keyCode] = false;
 		if (event.keyCode != 116 && event.keyCode != 122) // F5 and F11
 		{
@@ -75,21 +71,18 @@ InputManager = new function()
 
 	// ------------------------------------------------
 
-	this.handleMouseDown = function (event)
-	{
+	this.handleMouseDown = function (event){
 		this.mouseDown = true;
 		var newPos = GetRelativePosition(canvas, event.pageX, event.pageY);
 		this.lastMouseX = newPos.x;
 		this.lastMouseY = newPos.y;
 	}
 
-	this.handleMouseUp = function (event)
-	{
+	this.handleMouseUp = function (event){
 		this.mouseDown = false;
 	}
 
-	this.handleMouseMove = function (event)
-	{
+	this.handleMouseMove = function (event){
 		var newPos = GetRelativePosition(canvas, event.pageX, event.pageY);
 
 		this.deltaX = newPos.x - this.lastMouseX;
@@ -99,15 +92,13 @@ InputManager = new function()
 		this.lastMouseY = newPos.y;
 	}
 
-	this.handleMouseClick = function (event)
-	{
+	this.handleMouseClick = function (event){
 		// Only used for pad emulation on iOS. TODO: Support touch events 
 		// iOS emulates taps by sending mousedown then mouseup immediately.
 		this.mouseClick = true;
 	}
 
-	this.connect = function(document, canvas)
-	{
+	this.connect = function(document, canvas){
 		var bindThis = this;
 		$(document).keydown  (function(event) { bindThis.handleKeyDown.call(bindThis, event); });
 		$(document).keyup    (function(event) { bindThis.handleKeyUp.call(bindThis, event); });
@@ -121,8 +112,7 @@ InputManager = new function()
 	
 	this.PAD = { 'UP': 1, 'DOWN': 2, 'LEFT': 4, 'RIGHT': 8, 'OK': 16, 'CANCEL': 32 };
 	
-	this.padUpdate = function()
-	{
+	this.padUpdate = function(){
 		var state = 0;
 		if (this.currentlyPressedKeys[this.KEY.ARROW_UP])  	 state = state | this.PAD.UP;
 		if (this.currentlyPressedKeys[this.KEY.ARROW_DOWN])  state = state | this.PAD.DOWN;
