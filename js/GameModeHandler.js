@@ -22,6 +22,7 @@ function reset(){
 	offsetTime=0;
 	curTime=0;
 	startTime=new Date;
+	bombs=[];
 }
 function drawBaddies(){
 	switch(mode){
@@ -41,6 +42,7 @@ function drawBaddies(){
 	
 	}
 	drawPup();
+	hasColidedBomb(posX, posY, sizeX,true);
 }
 function drawPup(){
 	var pupImg;
@@ -58,4 +60,25 @@ function genXY(){
 function genCoordinate(min, max){
 	return (Math.floor(Math.random() * max)+min);
 	
+}
+function hasColidedBomb (x, y, size, kill){
+	for (var s, i = 0; s = this.bombs[i]; ++i){
+			var r2 = Pow2(size/3+18);
+			var dx = x-s.x;
+			var dy = y-s.y;
+			var calc=dx*dx+dy*dy;
+			if (calc < r2){
+				console.log(calc+" " + r2);
+				if(kill){
+					bombs.splice(i, 1);
+					dead=true;
+				}
+				console.log("dead");
+			}
+	}
+	return false;
+}
+
+function Pow2(v) {
+	return v*v;
 }
