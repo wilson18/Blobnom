@@ -1,6 +1,7 @@
 var bombs=[];
 var maxBombs=3;
 var pup=null;
+var pupSize=20;
 function changeGameMode(newMode){
 	mode=newMode;
 	reset();
@@ -23,6 +24,7 @@ function reset(){
 	curTime=0;
 	startTime=new Date;
 	bombs=[];
+	pup=null;
 }
 function drawBaddies(){
 	switch(mode){
@@ -43,6 +45,7 @@ function drawBaddies(){
 	}
 	drawPup();
 	hasColidedBomb(posX, posY, sizeX,true);
+	hasColidedPup(posX, posY, sizeX,true);
 }
 function drawPup(){
 	var pupImg;
@@ -52,7 +55,7 @@ function drawPup(){
 
 	pupImg = new Image();
 	pupImg.src= "images/burger.png";
-    ctx.drawImage(pupImg, pup.x, pup.y,32,32); 
+    ctx.drawImage(pupImg, pup.x, pup.y,pupSize,pupSize); 
 }
 function genXY(){
 	return { x : genCoordinate(30, canvas.width-30), y : genCoordinate(30, canvas.height-30) };
@@ -63,20 +66,34 @@ function genCoordinate(min, max){
 }
 function hasColidedBomb (x, y, size, kill){
 	for (var s, i = 0; s = this.bombs[i]; ++i){
-			var r2 = Pow2(size/3+18);
-			var dx = x-s.x;
-			var dy = y-s.y;
-			var calc=dx*dx+dy*dy;
-			if (calc < r2){
-				console.log(calc+" " + r2);
-				if(kill){
-					bombs.splice(i, 1);
-					dead=true;
-				}
+		var r2 = Pow2(size/3+18);
+		var dx = x-s.x;
+		var dy = y-s.y;
+		var calc=dx*dx+dy*dy;
+		if (calc < r2){
+			console.log(calc+" " + r2);
+			if(kill){
+				bombs.splice(i, 1);
+				dead=true;
 				console.log("dead");
 			}
+		}
 	}
-	return false;
+}
+function hasColidedPup(x, y, size, plusPoint){
+	var r2 = Pow2(size/3+10);
+	var dx = x-pup.x;
+	var dy = y-pup.y;
+	var calc=dx*dx+dy*dy;
+	if (calc < r2){
+		if(plusPoint){
+			givePoint();
+		}
+		pup=null;
+	}
+}
+function givePoint(){
+	points++;
 }
 
 function Pow2(v) {
