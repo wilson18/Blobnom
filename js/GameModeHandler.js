@@ -58,7 +58,7 @@ function gameLogic(elapsed){
 		}
 		break; 
 	case "Hard":
-		speed=(keysPressed*10)+200+(points*35);
+		speed=(keysPressed*16)+200+(points*35);
 		size=(points*7)+32;
 		if(points>=hardPointsRequired){
 			won();
@@ -109,7 +109,7 @@ function hasColidedBomb (x, y, obSize,projSize,  kill){
 	}
 }
 function hasColidedPup(x, y, obSize,projSize, plusPoint){
-	var r2 = Pow2((obSize/2)+(projSize/2));
+	var r2 = Pow2(obSize+projSize)*0.3;
 	var dx = x-pup.x;
 	var dy = y-pup.y;
 	var calc=dx*dx+dy*dy;
