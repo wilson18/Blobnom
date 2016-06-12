@@ -12,8 +12,7 @@ var facing='right';
 var open=true;
 var openTick=0;
 var openTickMax=15;
-var sizeX = 32;
-var sizeY = 32;
+var size = 32;
 var dead=false;
 var mode='Challenge'; //hard or challenge 
 var keysPressed=0;
@@ -62,7 +61,7 @@ function drawFinalScreen(){
 		smallMsg="omg, gratz man! Can you do any better though? \n" +
 				"Press [R] to restart.";
 	}else if(dead){
-		bgColour="red";
+		bgColour="#cf1010";
 		largeTextColour="white"; 
 		smallTextColour="white";
 		largeFontSize=105;

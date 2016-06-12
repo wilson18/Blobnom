@@ -2,6 +2,7 @@ var bombs=[];
 var maxBombs=3;
 var pup=null;
 var pupSize=20;
+var baseSpeed=200;
 function changeGameMode(newMode){
 	mode=newMode;
 	reset();
@@ -13,8 +14,7 @@ function reset(){
 	running=true;
 	paused=false;
 	facing='right';
-	sizeX = 32;
-	sizeY = 32;
+	size = 32;
 	dead=false;
 	keysPressed=0;
 	time=0; 
@@ -45,17 +45,19 @@ function drawBaddies(){
 	
 	}
 	drawPup();
-	hasColidedBomb(posX, posY, sizeX,true);
-	hasColidedPup(posX, posY, sizeX,true);
+	hasColidedBomb(posX, posY, 32,size,true);
+	hasColidedPup(posX, posY, 32,size,true);
 }
 function gameLogic(elapsed){
 	switch(mode){
 	case "Challenge":
 		var newSpeed=(keysPressed*5)+200;
-		var baseSpeed=200;
 		speed=(newSpeed>baseSpeed)?newSpeed-(points*10):baseSpeed;
 		break;	
 	case "Easy":
+		speed=(points*20)+200;
+		size=(points*7)+32;
+		
 		//console.log(speed);
 		if(points>=easyPointsRequired){
 			won();
@@ -85,9 +87,9 @@ function genCoordinate(min, max){
 	return (Math.floor(Math.random() * max)+min);
 	
 }
-function hasColidedBomb (x, y, size, kill){
+function hasColidedBomb (x, y, obSize,projSize,  kill){
 	for (var s, i = 0; s = this.bombs[i]; ++i){
-		var r2 = Pow2(size/3+18);
+		var r2 = Pow2((obSize/2)+(projSize/3));
 		var dx = x-s.x;
 		var dy = y-s.y;
 		var calc=dx*dx+dy*dy;
@@ -101,8 +103,8 @@ function hasColidedBomb (x, y, size, kill){
 		}
 	}
 }
-function hasColidedPup(x, y, size, plusPoint){
-	var r2 = Pow2(size/3+10);
+function hasColidedPup(x, y, obSize,projSize, plusPoint){
+	var r2 = Pow2((obSize/3)+(projSize/2));
 	var dx = x-pup.x;
 	var dy = y-pup.y;
 	var calc=dx*dx+dy*dy;

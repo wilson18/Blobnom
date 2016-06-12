@@ -9,7 +9,7 @@ function drawCharacter(){
     isDead();
     doMovement()
     char.src = "images/p_"+facing+"_"+(open?"open":"closed")+".png";
-    ctx.drawImage(char, posX, posY,sizeX,sizeY);   
+    ctx.drawImage(char, posX, posY,size,size);   
     
 }
 function moveCharacter(elapsed){
@@ -41,7 +41,7 @@ function isDead(){
     	}
         break;
     case "right":
-    	if(posX>canvas.width-sizeX){
+    	if(posX>canvas.width-size){
     		dead=true;
     	}
         break;
@@ -51,7 +51,7 @@ function isDead(){
     	}
         break;
     case "down":
-    	if(posY>canvas.width-sizeY){
+    	if(posY>canvas.width-size){
     		dead=true;
     	}
         break;
