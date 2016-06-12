@@ -50,19 +50,24 @@ function drawBaddies(){
 }
 function gameLogic(elapsed){
 	switch(mode){
-	case "Challenge":
-		var newSpeed=(keysPressed*5)+200;
-		speed=(newSpeed>baseSpeed)?newSpeed-(points*10):baseSpeed;
-		break;	
 	case "Easy":
 		speed=(points*20)+200;
 		size=(points*7)+32;
-		
-		//console.log(speed);
 		if(points>=easyPointsRequired){
 			won();
 		}
 		break; 
+	case "Hard":
+		speed=(keysPressed*10)+200+(points*35);
+		size=(points*7)+32;
+		if(points>=hardPointsRequired){
+			won();
+		}
+		break;	
+	case "Challenge":
+		var newSpeed=(keysPressed*5)+200;
+		speed=(newSpeed>baseSpeed)?newSpeed-(points*10):baseSpeed;
+		break;	
 		
 	}
 }
@@ -104,7 +109,7 @@ function hasColidedBomb (x, y, obSize,projSize,  kill){
 	}
 }
 function hasColidedPup(x, y, obSize,projSize, plusPoint){
-	var r2 = Pow2((obSize/3)+(projSize/2));
+	var r2 = Pow2((obSize/2)+(projSize/2));
 	var dx = x-pup.x;
 	var dy = y-pup.y;
 	var calc=dx*dx+dy*dy;

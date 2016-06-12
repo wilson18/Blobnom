@@ -41,7 +41,7 @@ function isDead(){
     	}
         break;
     case "right":
-    	if(posX>canvas.width-size){
+    	if(posX>canvas.width-(size/2)){
     		dead=true;
     	}
         break;
@@ -51,7 +51,7 @@ function isDead(){
     	}
         break;
     case "down":
-    	if(posY>canvas.width-size){
+    	if(posY>canvas.width-(size/2)){
     		dead=true;
     	}
         break;

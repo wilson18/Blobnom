@@ -24,7 +24,7 @@ var finishTime;
 var offsetTime=0;
 var curTime=0;
 var easyPointsRequired=10;
-var hardPointsRequired=12;
+var hardPointsRequired=13;
 var hasWon=false;
 function GameTick(elapsed){
 	
@@ -101,6 +101,9 @@ function addScreenText(){
 	switch(mode){
 	case "Easy":
 		ctx.fillText("Points Left: "+(easyPointsRequired-points)+"  Keys: " +keysPressed, 3, canvas.height-10);
+		break;
+	case "Hard":
+		ctx.fillText("Points Left: "+(hardPointsRequired-points)+"  Keys: " +keysPressed, 3, canvas.height-10);
 		break;
 	default: 
 		ctx.fillText("Points: "+points+"  Keys: " +keysPressed+ "   Time: " + (time==null?curTime:time) , 3, canvas.height-10);
