@@ -15,7 +15,7 @@ var openTickMax=15;
 var sizeX = 32;
 var sizeY = 32;
 var dead=false;
-var mode='Easy'; //hard or challenge 
+var mode='Challenge'; //hard or challenge 
 var keysPressed=0;
 var time=null; 
 var points=0;
@@ -38,7 +38,10 @@ function GameTick(elapsed){
 	    ctx.fillRect(0, 0, canvas.width, canvas.height);
 	   
 	    // Render objects
+
+		drawBaddies();
 	    drawCharacter();
+	    
 	    addScreenText();
 	}
 }
