@@ -24,12 +24,15 @@ var startTime;
 var finishTime; 
 var offsetTime=0;
 var curTime=0;
+var easyPointsRequired=10;
+var hardPointsRequired=12;
 
 function GameTick(elapsed){
 	
 	runKeyBoardCommands();
 	// --- Logic
 	if(running & !paused){
+		gameLogic(elapsed);
 		moveCharacter(elapsed);
 	    // --- Rendering
 	
@@ -54,7 +57,14 @@ function addScreenText(){
 	ctx.textAlign = "left";
 	ctx.fillStyle = "white";
 	ctx.font = "20px sans-serif";
-	ctx.fillText("Points: "+points+"  Keys: " +keysPressed+ "   Time: " + (time==null?curTime:time) , 3, canvas.height-10);
+	switch(mode){
+	case "Easy":
+		ctx.fillText("Points Left: "+(easyPointsRequired-points)+"  Keys: " +keysPressed, 3, canvas.height-10);
+		break;
+	default: 
+		ctx.fillText("Points: "+points+"  Keys: " +keysPressed+ "   Time: " + (time==null?curTime:time) , 3, canvas.height-10);
+	break;
+	}
 	ctx.textAlign = "right";
 	//Draw GameMode
 	ctx.textAlign = "right";

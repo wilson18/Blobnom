@@ -47,6 +47,16 @@ function drawBaddies(){
 	hasColidedBomb(posX, posY, sizeX,true);
 	hasColidedPup(posX, posY, sizeX,true);
 }
+function gameLogic(elapsed){
+	switch(mode){
+	case "Challenge":
+		var newSpeed=(keysPressed*5)+200;
+		var baseSpeed=200;
+		speed=(newSpeed>baseSpeed)?newSpeed-(points*10):baseSpeed;
+		console.log(speed);
+		break;	
+	}
+}
 function drawPup(){
 	var pupImg;
 	if(pup==null){
@@ -58,7 +68,7 @@ function drawPup(){
     ctx.drawImage(pupImg, pup.x, pup.y,pupSize,pupSize); 
 }
 function genXY(){
-	return { x : genCoordinate(30, canvas.width-30), y : genCoordinate(30, canvas.height-30) };
+	return { x : genCoordinate(50, canvas.width-105), y : genCoordinate(50, canvas.height-105) };
 }
 function genCoordinate(min, max){
 	return (Math.floor(Math.random() * max)+min);
