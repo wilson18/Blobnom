@@ -25,6 +25,7 @@ function reset(){
 	startTime=new Date;
 	bombs=[];
 	pup=null;
+	hasWon=false;
 }
 function drawBaddies(){
 	switch(mode){
@@ -53,9 +54,19 @@ function gameLogic(elapsed){
 		var newSpeed=(keysPressed*5)+200;
 		var baseSpeed=200;
 		speed=(newSpeed>baseSpeed)?newSpeed-(points*10):baseSpeed;
-		console.log(speed);
 		break;	
+	case "Easy":
+		//console.log(speed);
+		if(points>=easyPointsRequired){
+			won();
+		}
+		break; 
+		
 	}
+}
+function won(){
+	running=false;
+	hasWon=true;
 }
 function drawPup(){
 	var pupImg;

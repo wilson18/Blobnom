@@ -61,6 +61,5 @@ function isDead(){
 	if(dead && running){
 		time=curTime;
 		running=false;
-		alert("You are dead!");
 	}
 }
