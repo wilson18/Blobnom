@@ -65,7 +65,7 @@ function gameLogic(elapsed){
 		}
 		break;	
 	case "Challenge":
-		var newSpeed=(keysPressed*5)+200;
+		var newSpeed=(keysPressed*10)+200;
 		speed=(newSpeed>baseSpeed)?newSpeed-(points*10):baseSpeed;
 		break;	
 		
