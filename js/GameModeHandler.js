@@ -128,6 +128,8 @@ function drawLasers(elapsed){
 	hasColidedPup(laserX, laserXY, 20,10,false);
 	hasColidedBomb(laserY, laserYX, 10,20,false);
 	hasColidedPup(laserY, laserYX, 10,20,false);
+	hasColidedLaser(laserX, laserXY, 10,size);
+	hasColidedLaser(laserYX, laserY, size,10);
 }
 function won(){
 	running=false;
@@ -151,6 +153,7 @@ function genCoordinate(min, max){
 	
 }
 function hasColidedBomb (x, y, obSize,projSize,  kill){
+	console.log(x+", "+y);
 	for (var s, i = 0; s = this.bombs[i]; ++i){
 		var r2 = Pow2((obSize/2)+(projSize/3));
 		var dx = x-s.x;
@@ -161,22 +164,37 @@ function hasColidedBomb (x, y, obSize,projSize,  kill){
 			bombs.splice(i, 1);
 			if(kill){
 				dead=true;
-				console.log("dead");
 			}
 		}
 	}
 }
 function hasColidedPup(x, y, obSize,projSize, plusPoint){
-	var r2 = Pow2(obSize+projSize)*0.3;
-	var dx = x-pup.x;
-	var dy = y-pup.y;
-	var calc=dx*dx+dy*dy;
-	if (calc < r2){
-		if(plusPoint){
-			givePoint();
+	if(pup!=null){
+		var r2 = Pow2(obSize+projSize)*0.3;
+		var dx = x-pup.x;
+		var dy = y-pup.y;
+		var calc=dx*dx+dy*dy;
+		if (calc < r2){
+			if(plusPoint){
+				givePoint();
+			}
+			pup=null;
 		}
-		pup=null;
 	}
+	
+}
+function hasColidedLaser(x, y, obSize,projSize){
+	
+		var r2 = Pow2(obSize+projSize)*0.3;
+		var dx = posX-x;
+		var dy = posY-y;
+		var calc=dx*dx+dy*dy;
+		if (calc < r2){
+			dead=true
+			console.log("dead");
+		}
+	
+	
 }
 function givePoint(){
 	points++;
