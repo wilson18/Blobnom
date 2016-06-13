@@ -32,6 +32,7 @@ function reset(){
 	bombs=[];
 	pup=null;
 	hasWon=false;
+	menu=false;
 }
 function drawBaddies(){
 	switch(mode){

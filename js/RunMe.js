@@ -6,7 +6,7 @@ ctx = null;
 
 var posX = 20;
 var posY = 20;
-var running=true;
+var running=false;
 var paused=false;
 var facing='right';
 var open=true;
@@ -26,6 +26,7 @@ var curTime=0;
 var easyPointsRequired=10;
 var hardPointsRequired=13;
 var hasWon=false;
+var menu=true;
 function GameTick(elapsed){
 	
 	runKeyBoardCommands();
@@ -51,7 +52,14 @@ function GameTick(elapsed){
 }
 function drawFinalScreen(){
 	var bgColour="black", largeTextColour, smallTextColour, largeFontSize=75, smallFontSize=15, largeMsg="", smallMsg="";
-	if(hasWon){
+	if(menu){
+		ctx.fillStyle = "#EEEEEE";
+	    ctx.fillRect(0, 0, canvas.width, canvas.height);
+		var menuImg = new Image();
+		menuImg.src= "images/menu.png";
+	    ctx.drawImage(menuImg, 0, 0,canvas.width,canvas.height);
+	    console.log("drawing menu");
+	}else if(hasWon){
 		bgColour="green"
 		largeTextColour="black"; 
 		smallTextColour="blue";
@@ -77,17 +85,18 @@ function drawFinalScreen(){
 		largeMsg="Game Paused";
 		smallMsg="Press [Esc] to resume.";
 	}
-	
-	ctx.fillStyle = bgColour;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = largeTextColour;
-	ctx.textAlign = "center";
-	ctx.font = largeFontSize+"px sans-serif";
-    ctx.fillText(largeMsg,(canvas.width/2), (canvas.height/2)-20);
-	ctx.textAlign = "center";
-	ctx.fillStyle = smallTextColour;
-	ctx.font = smallFontSize+"px sans-serif";
-    ctx.fillText(smallMsg,(canvas.width/2) , (canvas.height/2)+7);
+	if(!menu){
+		ctx.fillStyle = bgColour;
+	    ctx.fillRect(0, 0, canvas.width, canvas.height);
+		ctx.fillStyle = largeTextColour;
+		ctx.textAlign = "center";
+		ctx.font = largeFontSize+"px sans-serif";
+	    ctx.fillText(largeMsg,(canvas.width/2), (canvas.height/2)-20);
+		ctx.textAlign = "center";
+		ctx.fillStyle = smallTextColour;
+		ctx.font = smallFontSize+"px sans-serif";
+	    ctx.fillText(smallMsg,(canvas.width/2) , (canvas.height/2)+7);
+	}
 }
 function addScreenText(){
 	//Bottom ScoreBoard
