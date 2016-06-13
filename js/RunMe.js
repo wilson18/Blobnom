@@ -27,11 +27,16 @@ var easyPointsRequired=10;
 var hardPointsRequired=13;
 var hasWon=false;
 var menu=true;
+var audioInited=false;
 function GameTick(elapsed){
 	
 	runKeyBoardCommands();
 	// --- Logic
 	if(running & !paused){
+		if(!audioInited){
+			initAudio();
+			audioInited=true;
+		}
 		gameLogic(elapsed);
 		moveCharacter(elapsed);
 	    // --- Rendering

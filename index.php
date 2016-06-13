@@ -12,6 +12,7 @@
           <script src='js/Player.js'></script>
           <script src="js/KeyBoardCommands.js"></script>
           <script src="js/GameModeHandler.js"></script>
+          <script src='js/AudioManager.js'></script>
           <script src='js/RunMe.js'></script>
 
     
