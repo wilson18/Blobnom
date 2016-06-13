@@ -57,7 +57,7 @@ function GameTick(elapsed){
 	}
 }
 function drawFinalScreen(){
-	var bgColour="black", largeTextColour, smallTextColour, largeFontSize=75, smallFontSize=15, largeMsg="", smallMsg="";
+	var bgColour="black", largeTextColour, smallTextColour, largeFontSize=75, smallFontSize=15, largeMsg="", smallMsg="", smallMsg2;
 	if(menu){
 		ctx.fillStyle = "#EEEEEE";
 	    ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -73,6 +73,15 @@ function drawFinalScreen(){
 		largeMsg="You Won!!!!";
 		smallMsg="omg, gratz man! Can you do any better though? \n" +
 				"Press [R] to restart.";
+	}else if(dead && mode=="Challenge"){
+		bgColour="black";
+		largeTextColour="blue"; 
+		smallTextColour="green";
+		largeFontSize=105;
+		smallFontSize=25;
+		largeMsg="You Died!!!";
+		smallMsg="Good Try though. Why not try again? Press [R] to restart.";
+		smallMsg2="You scored " + points + " points, pressed "+keysPressed+" keys and lasted "+(time==null?curTime:time)+" seconds!";
 	}else if(dead){
 		bgColour="#cf1010";
 		largeTextColour="white"; 
@@ -101,6 +110,11 @@ function drawFinalScreen(){
 		ctx.fillStyle = smallTextColour;
 		ctx.font = smallFontSize+"px sans-serif";
 	    ctx.fillText(smallMsg,(canvas.width/2) , (canvas.height/2)+7);
+		ctx.textAlign = "center";
+		ctx.fillStyle = smallTextColour;
+		ctx.font = smallFontSize+"px sans-serif";
+	    ctx.fillText(smallMsg2,(canvas.width/2) , (canvas.height/2)+7+smallFontSize);
+	    
 	}
 }
 function addScreenText(){
