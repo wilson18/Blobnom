@@ -79,6 +79,7 @@ function gameLogic(elapsed){
 	}
 }
 function drawLasers(elapsed){
+	var lspeed=300;
 	if(laserX==null){
 		laserX=genCoordinate(1,canvas.width);
 		console.log(laserX);
@@ -90,14 +91,14 @@ function drawLasers(elapsed){
     ctx.fillRect(laserX, laserXY, 10, 20);
     ctx.fillRect(laserYX, laserY, 20, 10);
     if(laserDown){
-    	laserXY=laserXY+(elapsed*220);
+    	laserXY=laserXY+(elapsed*lspeed);
     	if(laserXY>=canvas.height){
     		laserDown=false;
     		laserX+=size;
     	}
     }else{
     	laserDown=false;
-    	laserXY=laserXY-(elapsed*220);
+    	laserXY=laserXY-(elapsed*lspeed);
     	if(laserXY<=0){
     		laserDown=true;
     		laserX+=size;
@@ -107,14 +108,14 @@ function drawLasers(elapsed){
     	laserX=0;
     }
     if(laserRight){
-    	laserYX=laserYX+(elapsed*200);
+    	laserYX=laserYX+(elapsed*lspeed);
     	if(laserYX>=canvas.width){
     		laserRight=false;
     		laserY+=size;
     	}
     }else{
     	laserRight=false;
-    	laserYX=laserYX-(elapsed*200);
+    	laserYX=laserYX-(elapsed*lspeed);
     	if(laserYX<=0){
     		laserRight=true;
     		laserY+=size;
@@ -124,10 +125,10 @@ function drawLasers(elapsed){
     	laserY=0;
     }
 
-	hasColidedBomb(laserX, laserXY, 20,10,false);
-	hasColidedPup(laserX, laserXY, 20,10,false);
-	hasColidedBomb(laserY, laserYX, 10,20,false);
-	hasColidedPup(laserY, laserYX, 10,20,false);
+	hasColidedBomb(laserX, laserXY, 10,size,false);
+	hasColidedPup(laserX, laserXY, 10,pupSize,false);
+	hasColidedBomb(laserYX, laserY, size,20,false);
+	hasColidedPup(laserYX, laserY, pupSize,20,false);
 	hasColidedLaser(laserX, laserXY, 10,size);
 	hasColidedLaser(laserYX, laserY, size,10);
 }
