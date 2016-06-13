@@ -3,6 +3,8 @@ function drawCharacter(){
     if(openTick>openTickMax){
     	openTick=0;
         open=!open;
+
+    	//console.log(calcScore());
     }else{
     	openTick++;
     }

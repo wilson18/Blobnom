@@ -9,6 +9,7 @@ var laserY=null;
 var laserYX=0;
 var laserDown=true;
 var laserRight=true;
+var sentScore=false;
 function changeGameMode(newMode){
 	mode=newMode;
 	reset();
@@ -200,4 +201,19 @@ function givePoint(){
 
 function Pow2(v) {
 	return v*v;
+}
+function calcScore(){
+	return Math.round((((points*(time==null?curTime:time))*5)-((time==null?curTime:time)*keysPressed))*100)/100;
+}
+function sendScore(){
+	if(!sentScore){
+		/*
+		var theurl ='http://1upjam.supercoolproject.com/score.php?game=blobnom&score='+calcScore();
+		sentScore=true;
+		$.get( theurl, function( data ) {
+			
+			});
+			*/
+		}
+	
 }
