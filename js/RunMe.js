@@ -110,11 +110,13 @@ function drawFinalScreen(){
 		ctx.fillStyle = smallTextColour;
 		ctx.font = smallFontSize+"px sans-serif";
 	    ctx.fillText(smallMsg,(canvas.width/2) , (canvas.height/2)+7);
-		ctx.textAlign = "center";
-		ctx.fillStyle = smallTextColour;
-		ctx.font = smallFontSize+"px sans-serif";
-	    ctx.fillText(smallMsg2,(canvas.width/2) , (canvas.height/2)+7+smallFontSize);
-	    
+	    if(mode=="Challenge"){
+			ctx.textAlign = "center";
+			ctx.fillStyle = smallTextColour;
+			ctx.font = smallFontSize+"px sans-serif";
+		    ctx.fillText(smallMsg2,(canvas.width/2) , (canvas.height/2)+7+smallFontSize);
+		    
+	    }
 	}
 }
 function addScreenText(){
