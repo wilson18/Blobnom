@@ -3,6 +3,12 @@ var maxBombs=3;
 var pup=null;
 var pupSize=20;
 var baseSpeed=200;
+var laserX=null;
+var laserXY=0;
+var laserY=null;
+var laserYX=0;
+var laserDown=true;
+var laserRight=true;
 function changeGameMode(newMode){
 	mode=newMode;
 	reset();
@@ -67,9 +73,61 @@ function gameLogic(elapsed){
 	case "Challenge":
 		var newSpeed=(keysPressed*10)+200;
 		speed=(newSpeed>baseSpeed)?newSpeed-(points*10):baseSpeed;
+		
 		break;	
 		
 	}
+}
+function drawLasers(elapsed){
+	if(laserX==null){
+		laserX=genCoordinate(1,canvas.width);
+		console.log(laserX);
+	}if(laserY==null){
+		laserY=genCoordinate(1,canvas.height);
+	}
+	//x
+	ctx.fillStyle = "red";
+    ctx.fillRect(laserX, laserXY, 10, 20);
+    ctx.fillRect(laserYX, laserY, 20, 10);
+    if(laserDown){
+    	laserXY=laserXY+(elapsed*220);
+    	if(laserXY>=canvas.height){
+    		laserDown=false;
+    		laserX+=size;
+    	}
+    }else{
+    	laserDown=false;
+    	laserXY=laserXY-(elapsed*220);
+    	if(laserXY<=0){
+    		laserDown=true;
+    		laserX+=size;
+    	}
+    }
+    if(laserX>canvas.width){
+    	laserX=0;
+    }
+    if(laserRight){
+    	laserYX=laserYX+(elapsed*200);
+    	if(laserYX>=canvas.width){
+    		laserRight=false;
+    		laserY+=size;
+    	}
+    }else{
+    	laserRight=false;
+    	laserYX=laserYX-(elapsed*200);
+    	if(laserYX<=0){
+    		laserRight=true;
+    		laserY+=size;
+    	}
+    }
+    if(laserY>canvas.width){
+    	laserY=0;
+    }
+
+	hasColidedBomb(laserX, laserXY, 20,10,false);
+	hasColidedPup(laserX, laserXY, 20,10,false);
+	hasColidedBomb(laserY, laserYX, 10,20,false);
+	hasColidedPup(laserY, laserYX, 10,20,false);
 }
 function won(){
 	running=false;
@@ -100,8 +158,8 @@ function hasColidedBomb (x, y, obSize,projSize,  kill){
 		var calc=dx*dx+dy*dy;
 		if (calc < r2){
 			console.log(calc+" " + r2);
+			bombs.splice(i, 1);
 			if(kill){
-				bombs.splice(i, 1);
 				dead=true;
 				console.log("dead");
 			}

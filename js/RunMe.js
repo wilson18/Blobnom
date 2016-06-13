@@ -43,7 +43,7 @@ function GameTick(elapsed){
 
 		drawBaddies();
 	    drawCharacter();
-	    
+	    if(mode=="Challenge") drawLasers(elapsed);
 	    addScreenText();
 	}else{
 		drawFinalScreen();
