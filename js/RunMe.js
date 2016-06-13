@@ -28,14 +28,15 @@ var hardPointsRequired=13;
 var hasWon=false;
 var menu=true;
 var audioInited=false;
+var audioPlaying=false;
 function GameTick(elapsed){
 	
 	runKeyBoardCommands();
 	// --- Logic
 	if(running & !paused){
-		if(!audioInited){
-			initAudio();
-			audioInited=true;
+		if(!audioPlaying){
+			playAudio();
+			audioPlaying=true;
 		}
 		gameLogic(elapsed);
 		moveCharacter(elapsed);
@@ -63,7 +64,6 @@ function drawFinalScreen(){
 		var menuImg = new Image();
 		menuImg.src= "images/menu.png";
 	    ctx.drawImage(menuImg, 0, 0,canvas.width,canvas.height);
-	    console.log("drawing menu");
 	}else if(hasWon){
 		bgColour="green"
 		largeTextColour="black"; 
@@ -140,5 +140,10 @@ function addScreenText(){
 	    GameLoopManager.run(GameTick);
 		InputManager.reset();
 		startTime = new Date();
+		if(!audioInited){
+			initAudio();
+			audioInited=true;
+		}
+		console.log("Stop playing in the console you nerd and play the damn game!");
     
 	});

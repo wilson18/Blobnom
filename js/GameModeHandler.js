@@ -83,7 +83,6 @@ function drawLasers(elapsed){
 	var lspeed=300;
 	if(laserX==null){
 		laserX=genCoordinate(1,canvas.width);
-		console.log(laserX);
 	}if(laserY==null){
 		laserY=genCoordinate(1,canvas.height);
 	}
@@ -155,14 +154,12 @@ function genCoordinate(min, max){
 	
 }
 function hasColidedBomb (x, y, obSize,projSize,  kill){
-	console.log(x+", "+y);
 	for (var s, i = 0; s = this.bombs[i]; ++i){
 		var r2 = Pow2((obSize/2)+(projSize/3));
 		var dx = x-s.x;
 		var dy = y-s.y;
 		var calc=dx*dx+dy*dy;
 		if (calc < r2){
-			console.log(calc+" " + r2);
 			bombs.splice(i, 1);
 			if(kill){
 				dead=true;
@@ -192,8 +189,7 @@ function hasColidedLaser(x, y, obSize,projSize){
 		var dy = posY-y;
 		var calc=dx*dx+dy*dy;
 		if (calc < r2){
-			dead=true
-			console.log("dead");
+			dead=true;
 		}
 	
 	
